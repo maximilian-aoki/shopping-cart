@@ -32,7 +32,11 @@ export default function RootPage() {
       <Link to="/error">Error</Link>
       <Link to="/order-confirmed">Order Confirmed</Link>
       <hr />
-      {location.pathname === '/' ? <HomePage /> : <Outlet />}
+      {location.pathname === '/' ? (
+        <HomePage count={count} />
+      ) : (
+        <Outlet context={[count]} />
+      )}
       <hr />
       <p>count: {count}</p>
       <button type="button" onClick={handleClick}>
