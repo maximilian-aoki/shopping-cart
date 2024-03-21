@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 
+// component import
 import HomePage from '../home/HomePage';
 
+// css import
 import styles from './RootPage.module.css';
 
+// check to local storage
+let userCount = 0;
+if (localStorage.getItem('count')) {
+  userCount = Number(localStorage.getItem('count'));
+}
+
 export default function RootPage() {
+  const [count, setCount] = useState(userCount);
   const location = useLocation();
+
+  function handleClick() {
+    setCount(count + 1);
+    localStorage.setItem('count', count + 1);
+  }
 
   return (
     <>
@@ -19,6 +33,11 @@ export default function RootPage() {
       <Link to="/order-confirmed">Order Confirmed</Link>
       <hr />
       {location.pathname === '/' ? <HomePage /> : <Outlet />}
+      <hr />
+      <p>count: {count}</p>
+      <button type="button" onClick={handleClick}>
+        Add Count
+      </button>
     </>
   );
 }
