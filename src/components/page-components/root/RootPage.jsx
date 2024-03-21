@@ -4,23 +4,23 @@ import { Link, useLocation, Outlet } from 'react-router-dom';
 // component import
 import HomePage from '../home/HomePage';
 
+// hook import
+import useCoffeeFetch from '../../../custom-hooks/useCoffeeFetch';
+
 // css import
 import styles from './RootPage.module.css';
 
 // check to local storage
-let userCount = 0;
-if (localStorage.getItem('count')) {
-  userCount = Number(localStorage.getItem('count'));
-}
+// let userCount = 0;
+// if (localStorage.getItem('count')) {
+//   userCount = Number(localStorage.getItem('count'));
+// }
 
 export default function RootPage() {
-  const [count, setCount] = useState(userCount);
+  const { data, error, loading } = useCoffeeFetch();
   const location = useLocation();
 
-  function handleClick() {
-    setCount(count + 1);
-    localStorage.setItem('count', count + 1);
-  }
+  console.log(data);
 
   return (
     <>
@@ -33,15 +33,11 @@ export default function RootPage() {
       <Link to="/order-confirmed">Order Confirmed</Link>
       <hr />
       {location.pathname === '/' ? (
-        <HomePage count={count} />
+        <HomePage data={data} error={error} loading={loading} />
       ) : (
-        <Outlet context={[count]} />
+        <Outlet context={[data, error, loading]} />
       )}
       <hr />
-      <p>count: {count}</p>
-      <button type="button" onClick={handleClick}>
-        Add Count
-      </button>
     </>
   );
 }
