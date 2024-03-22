@@ -17,27 +17,65 @@ import styles from './RootPage.module.css';
 // }
 
 export default function RootPage() {
-  const { data, error, loading } = useCoffeeFetch();
+  const { storeData, error, loading } = useCoffeeFetch();
   const location = useLocation();
 
-  console.log(data);
-
   return (
-    <>
-      <h1>Root Component</h1>
-      <hr />
-      <Link to="/">Home</Link>
-      <Link to="/products">Products</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="/error">Error</Link>
-      <Link to="/order-confirmed">Order Confirmed</Link>
-      <hr />
-      {location.pathname === '/' ? (
-        <HomePage data={data} error={error} loading={loading} />
-      ) : (
-        <Outlet context={[data, error, loading]} />
-      )}
-      <hr />
-    </>
+    <div className={styles.appContainer}>
+      <header className={styles.headerContainer}>
+        <div className={styles.header}>
+          <h1 className={styles.headerContent}>Big Coffee.</h1>
+        </div>
+        <nav className={styles.navigationContainer}>
+          <Link
+            to="/"
+            className={
+              location.pathname === '/'
+                ? styles.navLinkActive
+                : styles.navLinkInactive
+            }
+          >
+            Home
+          </Link>
+          <Link
+            to="/products"
+            className={
+              /^\/products(\/)?(([1-9]|1[0-9]|20))?$/.test(location.pathname)
+                ? styles.navLinkActive
+                : styles.navLinkInactive
+            }
+          >
+            Products
+          </Link>
+          <Link
+            to="/cart"
+            className={
+              location.pathname === '/cart'
+                ? styles.navLinkActive
+                : styles.navLinkInactive
+            }
+          >
+            <p>Cart</p>
+            <div className={styles.navCartCount}>
+              <p>2</p>
+            </div>
+          </Link>
+        </nav>
+      </header>
+      <main className={styles.contentSpace}>
+        <div></div>
+        <div className={styles.contentContainer}>
+          {location.pathname === '/' ? (
+            <HomePage storeData={storeData} error={error} loading={loading} />
+          ) : (
+            <Outlet context={[storeData, error, loading]} />
+          )}
+        </div>
+        <div></div>
+      </main>
+      <footer className={styles.footer}>
+        <p>2024 Copyright Maximilian Aoki</p>
+      </footer>
+    </div>
   );
 }

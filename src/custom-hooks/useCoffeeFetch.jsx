@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function useCoffeeFetch() {
-  const [data, setData] = useState(null);
+  const [storeData, setStoreData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,13 +21,13 @@ export default function useCoffeeFetch() {
         const rawData = await response.json();
 
         if (!ignore) {
-          setData(rawData);
+          setStoreData(rawData);
           setError(null);
           setLoading(false);
         }
       } catch (error) {
         if (!ignore) {
-          setData(null);
+          setStoreData(null);
           setError(error);
           setLoading(false);
         }
@@ -41,5 +41,5 @@ export default function useCoffeeFetch() {
     };
   }, []);
 
-  return { data, error, loading };
+  return { storeData, error, loading };
 }

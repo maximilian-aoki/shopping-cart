@@ -8,6 +8,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* colour-theme */
+  --saffron: #eec643ff;
+  --seasalt: #f8f7f9ff;
+  --seasalt-dark: rgb(240, 240, 240);
+  --seasalt-x-dark: rgb(230, 230, 230);
+  --space-cadet: #2b2d42ff;
+  --steel-blue: #2d7dd2ff;
+  --fire-engine-red: #c1292eff;
+
+  background-color: var(--seasalt);
 }
 *,
 *::before,

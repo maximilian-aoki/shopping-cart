@@ -1,0 +1,68 @@
+.homePageContainer {
+  width: 100%;
+  display: grid;
+}
+.homePageContainer p {
+  line-height: 1.5rem;
+}
+.homePageContainer > div {
+  padding: 4rem 2rem;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  grid-template-columns: minmax(auto, 20rem) minmax(auto, 20rem);
+}
+.homeImage {
+  width: 15rem;
+  object-fit: cover;
+}
+.sectionContent {
+  display: grid;
+  gap: 1rem;
+}
+.sectionContent > h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* HERO */
+.homeProductsLink {
+  text-decoration: none;
+  background-color: var(--steel-blue);
+  color: white;
+  font-weight: bold;
+  width: 13rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: grid;
+  place-content: center;
+  transition: border-left 0.2s linear;
+}
+.homeProductsLink:hover {
+  border-left: 0.6rem solid var(--saffron);
+}
+
+/* FEATURE */
+.feature {
+  display: grid;
+  background-color: var(--seasalt-x-dark);
+}
+.homeImageFeature {
+  height: 20rem;
+  width: 9rem;
+  object-fit: cover;
+}
+.featureName {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: bold;
+}
+.featureBolded {
+  font-weight: bold;
+}
+
+/* CONTACT */
+.contactImage {
+  width: 10rem;
+  object-fit: cover;
+}
