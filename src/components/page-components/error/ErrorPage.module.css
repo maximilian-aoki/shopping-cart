@@ -1,0 +1,18 @@
+.errorContainer {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+.errorContent > h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+.errorContent > p {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+.errorLink {
+  font-size: 1.5rem;
+}
