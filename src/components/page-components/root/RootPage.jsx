@@ -20,6 +20,8 @@ export default function RootPage() {
   const { storeData, error, loading } = useCoffeeFetch();
   const location = useLocation();
 
+  console.log(storeData);
+
   return (
     <div className={styles.appContainer}>
       <header className={styles.headerContainer}>

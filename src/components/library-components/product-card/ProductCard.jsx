@@ -1,6 +1,26 @@
+import { useState } from 'react';
+
 import styles from './ProductCard.module.css';
 
-export default function ProductCard({ product, onSelect, onCartClicks }) {
+export default function ProductCard({ product, onSelect }) {
+  const [amount, setAmount] = useState(1);
+
+  function handleAmountChange(e) {
+    setAmount(e.target.value);
+  }
+
+  function handleAddToCart(e) {
+    e.stopPropagation();
+
+    console.log([
+      `id: ${e.target.getAttribute('data-id')}`,
+      `amount: ${e.target.getAttribute('data-amount')}`,
+    ]);
+
+    setAmount(1);
+  }
+
+  // determine roast text
   let roast;
   if (product.roast_level === 1) {
     roast = 'Extra-Light Roast';
@@ -26,22 +46,25 @@ export default function ProductCard({ product, onSelect, onCartClicks }) {
       <p className={styles.productDescription}>
         {product.description.split('.')[0] + '.'}
       </p>
-      <p className={styles.productCost}>${product.price}</p>
+      <p className={styles.productCost}>${product.price} / bag</p>
       <div className={styles.productActions}>
         <input
           type="number"
           name=""
           id=""
-          defaultValue={1}
+          value={amount}
           min={1}
           max={20}
-          onClick={onCartClicks}
+          onClick={(e) => e.stopPropagation()}
+          onChange={handleAmountChange}
           className={styles.productAmountInput}
         />
         <button
           type="button"
-          onClick={onCartClicks}
           className={styles.productAddCart}
+          data-id={product.id}
+          data-amount={amount}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </button>

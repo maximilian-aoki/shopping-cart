@@ -3,7 +3,7 @@
   place-items: center;
   padding: 4rem 2rem;
 }
-.productsContainer > h1 {
+.productsContainer > h2 {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;

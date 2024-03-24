@@ -41,10 +41,6 @@ export default function ProductsPage() {
     navigate(`/products/${productId}`);
   }
 
-  function handleStopPropagation(e) {
-    e.stopPropagation();
-  }
-
   function handleSearch(e) {
     setSearchValue(e.target.value);
   }
@@ -55,7 +51,7 @@ export default function ProductsPage() {
 
   return (
     <div className={styles.productsContainer}>
-      <h1>Our Products</h1>
+      <h2>Our Products</h2>
       <div className={styles.filterOptions}>
         <div className={styles.filterOptionContainer}>
           <img src="/search-logo.svg" alt="search logo" />
@@ -93,7 +89,6 @@ export default function ProductsPage() {
                 key={product.id}
                 product={product}
                 onSelect={handleProductSelect}
-                onCartClicks={handleStopPropagation}
               />
             );
           })

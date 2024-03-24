@@ -15,7 +15,11 @@ export default function Router() {
       errorElement: <ErrorPage />,
       children: [
         { path: 'products', element: <ProductsPage /> },
-        { path: 'products/:id', element: <ProductItemPage /> },
+        {
+          path: 'products/:id',
+          element: <ProductItemPage />,
+          errorElement: <ErrorPage />,
+        },
         { path: 'cart', element: <CartPage /> },
         { path: 'order-confirmed', element: <OrderConfirmedPage /> },
       ],
