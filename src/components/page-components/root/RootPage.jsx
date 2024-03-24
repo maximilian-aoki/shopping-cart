@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 
 // component import
@@ -11,16 +11,25 @@ import useCoffeeFetch from '../../../custom-hooks/useCoffeeFetch';
 import styles from './RootPage.module.css';
 
 // check to local storage
-// let userCount = 0;
-// if (localStorage.getItem('count')) {
-//   userCount = Number(localStorage.getItem('count'));
-// }
+let userCart = {};
+if (localStorage.getItem('cart')) {
+  userCart = JSON.parse(localStorage.getItem('cart'));
+}
 
 export default function RootPage() {
   const { storeData, error, loading } = useCoffeeFetch();
   const location = useLocation();
 
-  console.log(storeData);
+  const [cart, setCart] = useState(userCart);
+  console.log(cart);
+
+  function handleAddToCart(id, amount) {
+    const cartCopy = { ...cart };
+    cartCopy[id] = cartCopy.hasOwnProperty(id) ? cartCopy[id] + amount : amount;
+
+    setCart(cartCopy);
+    localStorage.setItem('cart', JSON.stringify(cartCopy));
+  }
 
   return (
     <div className={styles.appContainer}>
@@ -59,7 +68,11 @@ export default function RootPage() {
           >
             <p>Cart</p>
             <div className={styles.navCartCount}>
-              <p>0</p>
+              <p>
+                {Object.keys(cart).reduce((prev, current) => {
+                  return prev + cart[current];
+                }, 0)}
+              </p>
             </div>
           </Link>
         </nav>
@@ -70,7 +83,7 @@ export default function RootPage() {
           {location.pathname === '/' ? (
             <HomePage storeData={storeData} error={error} loading={loading} />
           ) : (
-            <Outlet context={[storeData, error, loading]} />
+            <Outlet context={[storeData, error, loading, handleAddToCart]} />
           )}
         </div>
         <div></div>

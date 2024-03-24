@@ -5,7 +5,7 @@ import styles from './ProductItemPage.module.css';
 
 export default function ProductItemPage() {
   const { id } = useParams();
-  const [storeData, error, loading] = useOutletContext();
+  const [storeData, error, loading, handleAddToCart] = useOutletContext();
 
   const [amount, setAmount] = useState(1);
 
@@ -13,13 +13,12 @@ export default function ProductItemPage() {
     setAmount(e.target.value);
   }
 
-  function handleAddToCart(e) {
-    console.log([
-      `id: ${e.target.getAttribute('data-id')}`,
-      `amount: ${e.target.getAttribute('data-amount')}`,
-    ]);
-
+  function handleAddButton(e) {
     setAmount(1);
+    handleAddToCart(
+      String(e.target.getAttribute('data-id')),
+      Number(e.target.getAttribute('data-amount')),
+    );
   }
 
   // throw error if url param is not an int [1-20]
@@ -99,7 +98,7 @@ export default function ProductItemPage() {
               <button
                 type="button"
                 className={styles.productAddCart}
-                onClick={handleAddToCart}
+                onClick={handleAddButton}
                 data-id={productObj.id}
                 data-amount={amount}
               >

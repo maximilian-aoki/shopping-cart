@@ -2,22 +2,21 @@ import { useState } from 'react';
 
 import styles from './ProductCard.module.css';
 
-export default function ProductCard({ product, onSelect }) {
+export default function ProductCard({ product, onSelect, onAddToCart }) {
   const [amount, setAmount] = useState(1);
 
   function handleAmountChange(e) {
     setAmount(e.target.value);
   }
 
-  function handleAddToCart(e) {
+  function handleAddButton(e) {
     e.stopPropagation();
-
-    console.log([
-      `id: ${e.target.getAttribute('data-id')}`,
-      `amount: ${e.target.getAttribute('data-amount')}`,
-    ]);
-
     setAmount(1);
+
+    onAddToCart(
+      String(e.target.getAttribute('data-id')),
+      Number(e.target.getAttribute('data-amount')),
+    );
   }
 
   // determine roast text
@@ -64,7 +63,7 @@ export default function ProductCard({ product, onSelect }) {
           className={styles.productAddCart}
           data-id={product.id}
           data-amount={amount}
-          onClick={handleAddToCart}
+          onClick={handleAddButton}
         >
           Add to Cart
         </button>

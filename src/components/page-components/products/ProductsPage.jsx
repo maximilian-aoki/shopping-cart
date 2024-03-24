@@ -6,7 +6,7 @@ import ProductCard from '../../library-components/product-card/ProductCard';
 import styles from './ProductsPage.module.css';
 
 export default function ProductsPage() {
-  const [storeData, error, loading] = useOutletContext();
+  const [storeData, error, loading, handleAddToCart] = useOutletContext();
 
   const [sortValue, setSortValue] = useState('default');
   const [searchValue, setSearchValue] = useState('');
@@ -89,6 +89,7 @@ export default function ProductsPage() {
                 key={product.id}
                 product={product}
                 onSelect={handleProductSelect}
+                onAddToCart={handleAddToCart}
               />
             );
           })
