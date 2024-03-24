@@ -57,7 +57,7 @@ export default function RootPage() {
           >
             <p>Cart</p>
             <div className={styles.navCartCount}>
-              <p>2</p>
+              <p>0</p>
             </div>
           </Link>
         </nav>

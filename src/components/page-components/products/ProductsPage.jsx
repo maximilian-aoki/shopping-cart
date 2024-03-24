@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
 import ProductCard from '../../library-components/product-card/ProductCard';
 
@@ -10,6 +10,8 @@ export default function ProductsPage() {
 
   const [sortValue, setSortValue] = useState('default');
   const [searchValue, setSearchValue] = useState('');
+
+  const navigate = useNavigate();
 
   // create array of products to show based on filter/sort
   let filteredStoreData = storeData;
@@ -35,7 +37,12 @@ export default function ProductsPage() {
   }
 
   function handleProductSelect(e) {
-    console.log(e.target.getAttribute('data-id'));
+    const productId = e.target.closest('div').getAttribute('data-id');
+    navigate(`/products/${productId}`);
+  }
+
+  function handleStopPropagation(e) {
+    e.stopPropagation();
   }
 
   function handleSearch(e) {
@@ -86,6 +93,7 @@ export default function ProductsPage() {
                 key={product.id}
                 product={product}
                 onSelect={handleProductSelect}
+                onCartClicks={handleStopPropagation}
               />
             );
           })

@@ -1,6 +1,6 @@
 import styles from './ProductCard.module.css';
 
-export default function ProductCard({ product, onSelect }) {
+export default function ProductCard({ product, onSelect, onCartClicks }) {
   let roast;
   if (product.roast_level === 1) {
     roast = 'Extra-Light Roast';
@@ -35,9 +35,14 @@ export default function ProductCard({ product, onSelect }) {
           defaultValue={1}
           min={1}
           max={20}
+          onClick={onCartClicks}
           className={styles.productAmountInput}
         />
-        <button type="button" className={styles.productAddCart}>
+        <button
+          type="button"
+          onClick={onCartClicks}
+          className={styles.productAddCart}
+        >
           Add to Cart
         </button>
       </div>
