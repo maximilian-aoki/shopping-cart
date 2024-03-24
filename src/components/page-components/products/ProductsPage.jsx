@@ -1,28 +1,96 @@
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+
+import ProductCard from '../../library-components/product-card/ProductCard';
 
 import styles from './ProductsPage.module.css';
 
 export default function ProductsPage() {
   const [storeData, error, loading] = useOutletContext();
 
-  let message = <p>loading...</p>;
-  if (Boolean(storeData)) {
-    message = (
-      <ul>
-        {storeData.map((productData) => {
-          return <li key={productData.id}>{productData.name}</li>;
-        })}
-      </ul>
-    );
+  const [sortValue, setSortValue] = useState('default');
+  const [searchValue, setSearchValue] = useState('');
+
+  // create array of products to show based on filter/sort
+  let filteredStoreData = storeData;
+  if (storeData) {
+    // first check if there's a sort
+    if (sortValue !== 'default') {
+      filteredStoreData = storeData.toSorted((a, b) =>
+        a[sortValue] < b[sortValue] ? -1 : 1,
+      );
+    }
+    // then check if there's a search filter
+    if (searchValue.trim() !== '') {
+      const searchTest = searchValue.trim().toLowerCase();
+      filteredStoreData = filteredStoreData.filter((product) => {
+        return (
+          product.name.toLowerCase().includes(searchTest) ||
+          (product.description.split('.')[0] + '.')
+            .toLowerCase()
+            .includes(searchTest)
+        );
+      });
+    }
   }
-  if (Boolean(error)) {
-    message = <p>error!</p>;
+
+  function handleProductSelect(e) {
+    console.log(e.target.getAttribute('data-id'));
+  }
+
+  function handleSearch(e) {
+    setSearchValue(e.target.value);
+  }
+
+  function handleSort(e) {
+    setSortValue(e.target.value);
   }
 
   return (
-    <>
-      <h1>Products</h1>
-      {message}
-    </>
+    <div className={styles.productsContainer}>
+      <h1>Our Products</h1>
+      <div className={styles.filterOptions}>
+        <div className={styles.filterOptionContainer}>
+          <img src="/search-logo.svg" alt="search logo" />
+          <input
+            type="text"
+            className={styles.filterSearch}
+            placeholder="Search by name/description.."
+            value={searchValue}
+            onChange={handleSearch}
+            maxLength={24}
+          />
+        </div>
+        <div className={styles.filterOptionContainer}>
+          <img src="/filter-logo.svg" alt="filter logo" />
+          <select
+            name=""
+            id=""
+            value={sortValue}
+            className={styles.filterSelect}
+            onChange={handleSort}
+          >
+            <option value="default">Default</option>
+            <option value="price">💲 Price</option>
+            <option value="roast_level">☕ Roast Level</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.productListFrame}>
+        {!storeData ? (
+          <p>loading...</p>
+        ) : (
+          filteredStoreData.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onSelect={handleProductSelect}
+              />
+            );
+          })
+        )}
+      </div>
+    </div>
   );
 }

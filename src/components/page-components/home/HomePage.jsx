@@ -16,7 +16,8 @@ export default function HomePage({ storeData, error, loading }) {
           <p>
             Little Coffee thinks we don't want you to know about their little
             hacks. Yes, that's a confusing sentence - read it again. Truth is,
-            no one has even seen Little Coffee bootstrap a React SPA.
+            no one has even seen anyone from Little Coffee bootstrap a React
+            SPA.
           </p>
           <Link to="/products" className={styles.homeProductsLink}>
             See All Products
@@ -40,7 +41,7 @@ export default function HomePage({ storeData, error, loading }) {
             <p className={styles.featureName}>{featuredProduct.name}</p>
             <p>
               <span className={styles.featureBolded}>Description: </span>
-              {featuredProduct.description}
+              {featuredProduct.description.split('.')[0] + '.'}
             </p>
             <p>
               <span className={styles.featureBolded}>Flavor Profile: </span>
