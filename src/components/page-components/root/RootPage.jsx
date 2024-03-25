@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 
 // component import
@@ -21,18 +21,42 @@ export default function RootPage() {
   const location = useLocation();
 
   const [cart, setCart] = useState(userCart);
+  const [productAdded, setProductAdded] = useState(false);
+
   console.log(cart);
+
+  // trigger product-add alert
+  useEffect(() => {
+    if (productAdded) {
+      const alert = document.getElementById('alert');
+      alert.classList.add(styles.alertContainerActive);
+
+      const timeout = setTimeout(() => {
+        setProductAdded(false);
+      }, 2000);
+
+      return () => {
+        console.log('cleared');
+        clearTimeout(timeout);
+        alert.classList.remove(styles.alertContainerActive);
+      };
+    }
+  }, [productAdded]);
 
   function handleAddToCart(id, amount) {
     const cartCopy = { ...cart };
     cartCopy[id] = cartCopy.hasOwnProperty(id) ? cartCopy[id] + amount : amount;
 
     setCart(cartCopy);
+    setProductAdded(true);
     localStorage.setItem('cart', JSON.stringify(cartCopy));
   }
 
   return (
     <div className={styles.appContainer}>
+      <div className={styles.alertContainerInactive} id="alert">
+        <p>Product Added</p>
+      </div>
       <header className={styles.headerContainer}>
         <div className={styles.header}>
           <h1 className={styles.headerContent}>Big Coffee.</h1>
@@ -83,7 +107,9 @@ export default function RootPage() {
           {location.pathname === '/' ? (
             <HomePage storeData={storeData} error={error} loading={loading} />
           ) : (
-            <Outlet context={[storeData, error, loading, handleAddToCart]} />
+            <Outlet
+              context={[storeData, error, loading, handleAddToCart, cart]}
+            />
           )}
         </div>
         <div></div>

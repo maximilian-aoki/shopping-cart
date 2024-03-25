@@ -11,6 +11,10 @@
   justify-self: center;
   align-self: center;
   object-fit: cover;
+  transition: transform 0.2s linear;
+}
+.productContainer img:hover {
+  transform: scale(1.02);
 }
 .productContent {
   display: grid;

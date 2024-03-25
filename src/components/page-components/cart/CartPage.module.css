@@ -1,0 +1,11 @@
+.cartContainer {
+  display: grid;
+  place-content: center;
+  padding: 4rem 2rem;
+}
+.cartContainer > h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}

@@ -69,3 +69,23 @@
   font-weight: bold;
   background-color: var(--saffron);
 }
+
+/* product added */
+.alertContainerInactive {
+  position: fixed;
+  width: 100vw;
+  padding: 1rem 4rem;
+  background-color: var(--steel-blue);
+  color: white;
+
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-in-out;
+}
+.alertContainerActive {
+  transform: scaleY(1);
+}
+.alertContainerInactive p {
+  font-weight: bold;
+  font-style: italic;
+}
