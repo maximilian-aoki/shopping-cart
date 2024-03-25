@@ -65,6 +65,13 @@
   overflow: auto;
 }
 
+/* no-matches */
+.noMatches {
+  padding: 1rem;
+  font-style: italic;
+  background-color: var(--seasalt-x-dark);
+}
+
 /* PRODUCTS-LOADING */
 .productsLoading {
   height: 588.8px;

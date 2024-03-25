@@ -40,6 +40,10 @@ export default function CartPage() {
       </div>
       {!storeData ? (
         <div className={styles.skeleton}></div>
+      ) : Object.keys(cart).length < 1 ? (
+        <div className={styles.cartEmpty}>
+          <p>No items in cart!</p>
+        </div>
       ) : (
         <>
           <div className={styles.cartItems}>

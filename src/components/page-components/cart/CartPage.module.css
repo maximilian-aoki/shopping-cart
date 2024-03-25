@@ -55,6 +55,13 @@
   cursor: pointer;
 }
 
+/* cart empty */
+.cartEmpty {
+  padding: 1rem;
+  font-style: italic;
+  background-color: var(--seasalt-x-dark);
+}
+
 /* PRODUCT-LOADING */
 .cartLoading {
   height: 277px;

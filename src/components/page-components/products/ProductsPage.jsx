@@ -82,6 +82,10 @@ export default function ProductsPage() {
       <div className={styles.productListFrame}>
         {!storeData ? (
           <div className={styles.skeleton}></div>
+        ) : filteredStoreData.length < 1 ? (
+          <div className={styles.noMatches}>
+            No matches found.. try a different search!
+          </div>
         ) : (
           filteredStoreData.map((product) => {
             return (
