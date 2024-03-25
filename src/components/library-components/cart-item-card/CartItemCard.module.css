@@ -1,0 +1,55 @@
+/* cart card */
+.cartCard {
+  display: grid;
+  border-radius: 0.5rem;
+  grid-template-columns: 3fr 2fr 1fr 1fr 1fr;
+  background-color: var(--seasalt-x-dark);
+  -webkit-box-shadow: inset 4px 4px 15px -8px rgba(0, 0, 0, 0.85);
+  box-shadow: 4px 4px 15px -8px rgba(0, 0, 0, 0.45);
+}
+.cartCard img {
+  width: 3rem;
+  height: 4rem;
+  object-fit: cover;
+}
+.cartCard > div {
+  display: grid;
+  place-content: center;
+  font-weight: bold;
+  padding: 1rem;
+}
+.cartCard input {
+  width: 4rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
+  padding-left: 0.5rem;
+  border: 1px solid rgb(183, 183, 183);
+  border-radius: 0.5rem;
+}
+.cartCard button {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-image: url('/trash-logo.svg');
+  background-size: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(171, 171, 171);
+}
+.cartCardItem {
+  display: grid;
+  align-items: center;
+  justify-self: start;
+  grid-auto-flow: column;
+  gap: 1rem;
+}
+
+/* interactions */
+.cartCard input:focus {
+  border: 1px solid var(--steel-blue);
+}
+.cartCard button:hover {
+  background-color: var(--fire-engine-red);
+}

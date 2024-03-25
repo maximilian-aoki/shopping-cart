@@ -1,11 +1,26 @@
 .cartContainer {
   display: grid;
-  place-content: center;
+  justify-items: stretch;
   padding: 4rem 2rem;
 }
 .cartContainer > h2 {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 2rem;
+}
+.cartLabels {
+  display: grid;
+  justify-self: stretch;
+  justify-items: center;
+  grid-template-columns: 3fr 2fr 1fr 1fr 1fr;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(203, 203, 203);
+  margin-bottom: 1rem;
+}
+.cartItems {
+  display: grid;
+  gap: 1rem;
 }

@@ -36,7 +36,6 @@ export default function RootPage() {
       }, 2000);
 
       return () => {
-        console.log('cleared');
         clearTimeout(timeout);
         alert.classList.remove(styles.alertContainerActive);
       };
@@ -49,6 +48,26 @@ export default function RootPage() {
 
     setCart(cartCopy);
     setProductAdded(true);
+    localStorage.setItem('cart', JSON.stringify(cartCopy));
+  }
+
+  function handleRemoveFromCart(e) {
+    const id = String(e.target.getAttribute('data-id'));
+    const cartCopy = { ...cart };
+    delete cartCopy[id];
+
+    setCart(cartCopy);
+    localStorage.setItem('cart', JSON.stringify(cartCopy));
+  }
+
+  function handleChangeCartAmount(e) {
+    const id = String(e.target.getAttribute('data-id'));
+    const amount = Number(e.target.value);
+
+    const cartCopy = { ...cart };
+    cartCopy[id] = amount;
+
+    setCart(cartCopy);
     localStorage.setItem('cart', JSON.stringify(cartCopy));
   }
 
@@ -108,7 +127,15 @@ export default function RootPage() {
             <HomePage storeData={storeData} error={error} loading={loading} />
           ) : (
             <Outlet
-              context={[storeData, error, loading, handleAddToCart, cart]}
+              context={[
+                storeData,
+                error,
+                loading,
+                handleAddToCart,
+                cart,
+                handleRemoveFromCart,
+                handleChangeCartAmount,
+              ]}
             />
           )}
         </div>
