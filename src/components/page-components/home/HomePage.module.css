@@ -61,6 +61,24 @@
   font-weight: bold;
 }
 
+/* FEATURE-LOADING */
+.featureLoading {
+  height: 448px;
+  background-color: var(--seasalt-x-dark);
+}
+.skeleton {
+  composes: featureLoading;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--seasalt-x-dark);
+  }
+  100% {
+    background-color: rgb(185, 185, 185);
+  }
+}
+
 /* CONTACT */
 .contactImage {
   width: 10rem;

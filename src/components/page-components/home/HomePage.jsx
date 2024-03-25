@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 
-export default function HomePage({ storeData, error, loading }) {
+export default function HomePage({ storeData, purchases, error, loading }) {
   // temporary random 'feature' pick
   // turn this into a user-behavior-dependant algorithm-based selection
   const featuredProduct = storeData
@@ -60,7 +60,7 @@ export default function HomePage({ storeData, error, loading }) {
           </div>
         </div>
       ) : (
-        <p>loading...</p>
+        <div className={styles.skeleton}></div>
       )}
       <div className={styles.contact}>
         <div className={styles.sectionContent}>

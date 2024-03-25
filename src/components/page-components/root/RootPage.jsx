@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 
 // component import
 import HomePage from '../home/HomePage';
@@ -10,10 +10,14 @@ import useCoffeeFetch from '../../../custom-hooks/useCoffeeFetch';
 // css import
 import styles from './RootPage.module.css';
 
-// check to local storage
+// checks to local storage for user cart and purchase history
 let userCart = {};
+let userPurchases = {};
 if (localStorage.getItem('cart')) {
   userCart = JSON.parse(localStorage.getItem('cart'));
+}
+if (localStorage.getItem('purchases')) {
+  userPurchases = JSON.parse(localStorage.getItem('purchases'));
 }
 
 export default function RootPage() {
@@ -21,9 +25,15 @@ export default function RootPage() {
   const location = useLocation();
 
   const [cart, setCart] = useState(userCart);
+  const [purchases, setPurchases] = useState(userPurchases);
   const [productAdded, setProductAdded] = useState(false);
 
+  const navigate = useNavigate();
+
+  console.log('cart:');
   console.log(cart);
+  console.log('purchases:');
+  console.log(purchases);
 
   // trigger product-add alert
   useEffect(() => {
@@ -41,6 +51,22 @@ export default function RootPage() {
       };
     }
   }, [productAdded]);
+
+  function handleCheckout(cart) {
+    const newPurchases = { ...purchases };
+    Object.keys(cart).forEach((id) => {
+      newPurchases[id] = newPurchases.hasOwnProperty(id)
+        ? newPurchases[id] + cart[id]
+        : cart[id];
+    });
+
+    setPurchases(newPurchases);
+    setCart({});
+    localStorage.setItem('purchases', JSON.stringify(newPurchases));
+    localStorage.setItem('cart', JSON.stringify({}));
+
+    navigate('/order-confirmed');
+  }
 
   function handleAddToCart(id, amount) {
     const cartCopy = { ...cart };
@@ -124,7 +150,12 @@ export default function RootPage() {
         <div></div>
         <div className={styles.contentContainer}>
           {location.pathname === '/' ? (
-            <HomePage storeData={storeData} error={error} loading={loading} />
+            <HomePage
+              storeData={storeData}
+              purchases={purchases}
+              error={error}
+              loading={loading}
+            />
           ) : (
             <Outlet
               context={[
@@ -135,6 +166,7 @@ export default function RootPage() {
                 cart,
                 handleRemoveFromCart,
                 handleChangeCartAmount,
+                handleCheckout,
               ]}
             />
           )}

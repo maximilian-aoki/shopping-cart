@@ -64,3 +64,23 @@
   border-radius: 0.5rem;
   overflow: auto;
 }
+
+/* PRODUCTS-LOADING */
+.productsLoading {
+  height: 588.8px;
+  width: 60rem;
+  background-color: var(--seasalt-x-dark);
+  border-radius: 0.5rem;
+}
+.skeleton {
+  composes: productsLoading;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--seasalt-x-dark);
+  }
+  100% {
+    background-color: rgb(185, 185, 185);
+  }
+}

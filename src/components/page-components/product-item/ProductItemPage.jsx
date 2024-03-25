@@ -59,7 +59,10 @@ export default function ProductItemPage() {
   return (
     <div className={styles.productContainer}>
       {!storeData ? (
-        <p>Loading...</p>
+        <>
+          <div className={styles.skeleton}></div>
+          <div className={styles.skeleton}></div>
+        </>
       ) : (
         <>
           <img src={productObj.image_url} alt="product" />

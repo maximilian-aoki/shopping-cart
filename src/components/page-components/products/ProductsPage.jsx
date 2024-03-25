@@ -81,7 +81,7 @@ export default function ProductsPage() {
       </div>
       <div className={styles.productListFrame}>
         {!storeData ? (
-          <p>loading...</p>
+          <div className={styles.skeleton}></div>
         ) : (
           filteredStoreData.map((product) => {
             return (

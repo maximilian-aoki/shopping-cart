@@ -71,3 +71,23 @@
   border-left: 0.6rem solid var(--saffron);
   cursor: pointer;
 }
+
+/* PRODUCT-LOADING */
+.productLoading {
+  height: 400px;
+  width: 100%;
+  background-color: var(--seasalt-x-dark);
+  border-radius: 0.5rem;
+}
+.skeleton {
+  composes: productLoading;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--seasalt-x-dark);
+  }
+  100% {
+    background-color: rgb(185, 185, 185);
+  }
+}
