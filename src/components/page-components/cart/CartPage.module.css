@@ -81,3 +81,22 @@
     background-color: rgb(185, 185, 185);
   }
 }
+
+/* ERROR */
+.error {
+  composes: cartLoading;
+  height: auto;
+  display: grid;
+  color: var(--fire-engine-red);
+}
+.error > div {
+  display: grid;
+  padding: 1rem;
+  gap: 1rem;
+}
+.error h3 {
+  font-weight: bold;
+}
+.error p {
+  max-width: 25rem;
+}

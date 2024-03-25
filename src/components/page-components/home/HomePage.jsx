@@ -59,6 +59,16 @@ export default function HomePage({ storeData, purchases, error, loading }) {
             </Link>
           </div>
         </div>
+      ) : Boolean(error) ? (
+        <div className={styles.error}>
+          <div>
+            <h3>Network Error:</h3>
+            <p>
+              Could not connect to API. Check your network connection or check
+              the fetch URL.
+            </p>
+          </div>
+        </div>
       ) : (
         <div className={styles.skeleton}></div>
       )}

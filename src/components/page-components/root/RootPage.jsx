@@ -30,11 +30,6 @@ export default function RootPage() {
 
   const navigate = useNavigate();
 
-  console.log('cart:');
-  console.log(cart);
-  console.log('purchases:');
-  console.log(purchases);
-
   // trigger product-add alert
   useEffect(() => {
     if (productAdded) {

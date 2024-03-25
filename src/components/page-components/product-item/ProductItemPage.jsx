@@ -58,11 +58,21 @@ export default function ProductItemPage() {
 
   return (
     <div className={styles.productContainer}>
-      {!storeData ? (
+      {loading ? (
         <>
           <div className={styles.skeleton}></div>
           <div className={styles.skeleton}></div>
         </>
+      ) : Boolean(error) ? (
+        <div className={styles.error}>
+          <div>
+            <h3>Network Error:</h3>
+            <p>
+              Could not connect to API. Check your network connection or check
+              the fetch URL.
+            </p>
+          </div>
+        </div>
       ) : (
         <>
           <img src={productObj.image_url} alt="product" />

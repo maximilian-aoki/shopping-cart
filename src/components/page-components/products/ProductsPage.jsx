@@ -80,8 +80,18 @@ export default function ProductsPage() {
         </div>
       </div>
       <div className={styles.productListFrame}>
-        {!storeData ? (
+        {loading ? (
           <div className={styles.skeleton}></div>
+        ) : Boolean(error) ? (
+          <div className={styles.error}>
+            <div>
+              <h3>Network Error:</h3>
+              <p>
+                Could not connect to API. Check your network connection or check
+                the fetch URL.
+              </p>
+            </div>
+          </div>
         ) : filteredStoreData.length < 1 ? (
           <div className={styles.noMatches}>
             No matches found.. try a different search!

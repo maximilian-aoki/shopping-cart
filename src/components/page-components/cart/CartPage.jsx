@@ -38,8 +38,18 @@ export default function CartPage() {
         <p>Total</p>
         <p>Remove</p>
       </div>
-      {!storeData ? (
+      {loading ? (
         <div className={styles.skeleton}></div>
+      ) : Boolean(error) ? (
+        <div className={styles.error}>
+          <div>
+            <h3>Network Error:</h3>
+            <p>
+              Could not connect to API. Check your network connection or check
+              the fetch URL.
+            </p>
+          </div>
+        </div>
       ) : Object.keys(cart).length < 1 ? (
         <div className={styles.cartEmpty}>
           <p>No items in cart!</p>
